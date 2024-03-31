@@ -7,11 +7,21 @@ namespace Question_App.Models
         public int Id { get; private set; }
         public string Name { get; private set; }
         public int Timer { get; private set; }
+        //public Question[] Questions { get; private set; }
 
         public Test(string name, int timer)
         {
             Name = name;
             Timer = timer;
+            //Questions = questions;
+        }
+
+        public Test(int id, string name, int timer)
+        {
+            Id = id;
+            Name = name;
+            Timer = timer;
+            //Questions = questions;
         }
 
         public void EditName(string name)
