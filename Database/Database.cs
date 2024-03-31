@@ -23,11 +23,12 @@ namespace DB
             cmd.ExecuteNonQuery();
         }
 
-        public static void Delete(string table, int id)
+        public static void Delete(string table, string whereColumn, string whereValue)
         {
-            SqlCommand cmd = new SqlCommand("DELETE FROM @table WHERE Id = '@id';", Connection);
+            SqlCommand cmd = new SqlCommand("DELETE FROM @table WHERE @column = '@value';", Connection);
             cmd.Parameters.AddWithValue("table", table);
-            cmd.Parameters.AddWithValue("id", id);
+            cmd.Parameters.AddWithValue("column", whereColumn);
+            cmd.Parameters.AddWithValue("value", whereValue);
 
             cmd.ExecuteNonQuery();
         }

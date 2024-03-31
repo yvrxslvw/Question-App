@@ -1,0 +1,36 @@
+﻿using DB;
+
+namespace Question_App.Models
+{
+    internal class Question
+    {
+        public int Id { get; }
+        public int TestId { get; }
+        public string Content { get; private set; }
+        public string Answer { get; private set; }
+
+        public Question(int testId, string content, string answer)
+        {
+            TestId = testId;
+            Content = content;
+            Answer = answer.ToLower();
+        }
+
+        public void EditContent(string content)
+        {
+            Content = content;
+            Database.Update("Questions", new string[] { "Content" }, new string[] { content }, Id);
+        }
+
+        public void EditAnswer(string answer)
+        {
+            Answer = answer.ToLower();
+            Database.Update("Questions", new string[] { "Answer" }, new string[] { answer.ToLower() }, Id);
+        }
+
+        public void InsertDatabase()
+        {
+            Database.Insert("Questions", "TestId, Content, Answer", $"'{TestId}', '{Content}', '{Answer}'");
+        }
+    }
+}
