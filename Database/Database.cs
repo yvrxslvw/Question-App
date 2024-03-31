@@ -1,4 +1,5 @@
 ﻿using System.Data.SqlClient;
+using System.Linq;
 
 namespace DB
 {
@@ -14,8 +15,8 @@ namespace DB
 
         public static void Insert(string table, string[] columns, string[] values)
         {
-            string cols = MergeDefaultArgs(columns);
-            string vals = MergeDefaultArgs(values);
+            string cols = string.Join(", ", columns);
+            string vals = string.Join(", ", values);
 
             SqlCommand cmd = new SqlCommand("INSERT INTO @table (@columns) VALUES (@values);", Connection);
             cmd.Parameters.AddWithValue("table", table);
@@ -44,20 +45,6 @@ namespace DB
             cmd.Parameters.AddWithValue("id", id);
 
             cmd.ExecuteNonQuery();
-        }
-
-        private static string MergeDefaultArgs(string[] args)
-        {
-            int argsLen = args.Length;
-            string result = $"{args[0]}";
-            if (args.Length > 1)
-            {
-                for (int i = 1; i < argsLen; i++)
-                {
-                    result += ", " + args[i];
-                }
-            }
-            return result;
         }
 
         private static string MergeSetterArgs(string[] firstArgs, string[] secondArgs)
