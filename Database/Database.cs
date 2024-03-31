@@ -13,14 +13,16 @@ namespace DB
             Connection.Open();
         }
 
-        public static void Insert(string table, string columns, string values)
+        public static int Insert(string table, string columns, string values)
         {
             SqlCommand cmd = new SqlCommand("INSERT INTO @table (@columns) VALUES (@values);", Connection);
             cmd.Parameters.AddWithValue("table", table);
             cmd.Parameters.AddWithValue("columns", columns);
             cmd.Parameters.AddWithValue("values", values);
 
-            cmd.ExecuteNonQuery();
+            var result = cmd.ExecuteScalar();
+
+            return 71061; // TO CHANGE
         }
 
         public static void Delete(string table, string whereColumn, string whereValue)

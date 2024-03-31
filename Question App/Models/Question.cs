@@ -4,7 +4,7 @@ namespace Question_App.Models
 {
     internal class Question
     {
-        public int Id { get; }
+        public int Id { get; private set; }
         public int TestId { get; }
         public string Content { get; private set; }
         public string Answer { get; private set; }
@@ -30,7 +30,7 @@ namespace Question_App.Models
 
         public void InsertDatabase()
         {
-            Database.Insert("Questions", "TestId, Content, Answer", $"'{TestId}', '{Content}', '{Answer}'");
+            Id = Database.Insert("Questions", "TestId, Content, Answer", $"'{TestId}', '{Content}', '{Answer}'");
         }
     }
 }
