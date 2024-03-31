@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace Question_App
@@ -12,10 +11,21 @@ namespace Question_App
     public partial class MainForm : Form
     {
         private readonly List<Test> tests = new List<Test> { };
+        private Test selectedTest = null;
 
         public MainForm()
         {
             InitializeComponent();
+        }
+
+        private void ShowError(string message, Exception exception)
+        {
+            MessageBox.Show(
+                    text: $"{message}\n{exception.Message}",
+                    caption: "Ошибка",
+                    buttons: MessageBoxButtons.OK,
+                    icon: MessageBoxIcon.Error
+                );
         }
 
         private void LoadTests()
@@ -31,19 +41,14 @@ namespace Question_App
 
                 while (reader.Read())
                 {
-                    item = new Test(Convert.ToInt32(reader["Id"]), Convert.ToString(reader["Name"]), Convert.ToInt32(reader["Timer"]));
+                    item = new Test(Convert.ToInt32(reader["Id"]), Convert.ToString(reader["Name"]).Trim(), Convert.ToInt32(reader["Timer"]));
                     testsListBox.Items.Add($"ID: {item.Id}\t{item.Name}");
                     tests.Add(item);
                 }
             }
             catch (Exception exc)
             {
-                MessageBox.Show(
-                    text: $"{exc.Message}",
-                    caption: "Ошибка",
-                    buttons: MessageBoxButtons.OK,
-                    icon: MessageBoxIcon.Error
-                );
+                ShowError("Произошла непредвиденная ошибка...", exc);
             }
             finally
             {
@@ -64,24 +69,42 @@ namespace Question_App
             }
             catch (Exception exc)
             {
-                MessageBox.Show(
-                    text: $"Не удалось подключиться к базе данных.\n{exc.Message}",
-                    caption: "Ошибка",
-                    buttons: MessageBoxButtons.OK,
-                    icon: MessageBoxIcon.Error
-                );
+                ShowError("Не удалось подключиться к базе данных.", exc);
                 Application.Exit();
             }
         }
 
         private void TestsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (testsListBox.SelectedIndex == -1) return;
+            int index = testsListBox.SelectedIndex;
+            if (index == -1) return;
 
             addNewButton.Enabled = true;
             editButton.Enabled = true;
             deleteButton.Enabled = true;
             startTestButton.Enabled = true;
+
+            selectedTest = tests[index];
+        }
+
+        private void AddNewButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("add new test feature");
+        }
+
+        private void EditButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($"edit {selectedTest.Id} {selectedTest.Name} {selectedTest.Timer} feature");
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($"delete {selectedTest.Id} {selectedTest.Name} {selectedTest.Timer} feature");
+        }
+
+        private void StartTestButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($"start {selectedTest.Id} {selectedTest.Name} {selectedTest.Timer} feature");
         }
     }
 }

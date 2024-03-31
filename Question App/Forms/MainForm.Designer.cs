@@ -30,18 +30,21 @@
             resources.ApplyResources(this.addNewButton, "addNewButton");
             this.addNewButton.Name = "addNewButton";
             this.addNewButton.UseVisualStyleBackColor = true;
+            this.addNewButton.Click += new System.EventHandler(this.AddNewButton_Click);
             // 
             // editButton
             // 
             resources.ApplyResources(this.editButton, "editButton");
             this.editButton.Name = "editButton";
             this.editButton.UseVisualStyleBackColor = true;
+            this.editButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
             // deleteButton
             // 
             resources.ApplyResources(this.deleteButton, "deleteButton");
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // testsListBox
             // 
@@ -55,6 +58,7 @@
             resources.ApplyResources(this.startTestButton, "startTestButton");
             this.startTestButton.Name = "startTestButton";
             this.startTestButton.UseVisualStyleBackColor = true;
+            this.startTestButton.Click += new System.EventHandler(this.StartTestButton_Click);
             // 
             // MainForm
             // 
