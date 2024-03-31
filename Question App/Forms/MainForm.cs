@@ -1,25 +1,25 @@
-﻿using System.Windows.Forms;
+﻿using DB;
 using System.Configuration;
-using DB;
+using System.Windows.Forms;
 
 namespace Question_App
 {
-	public partial class MainForm : Form
-	{
-		public MainForm()
-		{
-			InitializeComponent();
-		}
+    public partial class MainForm : Form
+    {
+        public MainForm()
+        {
+            InitializeComponent();
+        }
 
         private void MainForm_Load(object sender, System.EventArgs e)
         {
-			try
-			{
+            try
+            {
                 string connectionString = ConfigurationManager.ConnectionStrings["mssqlDB"].ConnectionString;
                 Database.Open(connectionString);
             }
-			catch (System.Exception)
-			{
+            catch (System.Exception)
+            {
                 MessageBox.Show(
                     text: "Не удалось подключиться к базе данных.",
                     caption: "Ошибка",
