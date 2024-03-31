@@ -47,6 +47,24 @@ namespace DB
             cmd.ExecuteNonQuery();
         }
 
+        public static void Select(string table) // TO REMAKE
+        {
+            SqlCommand cmd = new SqlCommand("SELECT * FROM @table;", Connection);
+            cmd.Parameters.AddWithValue("table", table);
+
+            cmd.ExecuteReader();
+        }
+
+        public static void Select(string table, string whereColumn, string whereValue) // TO REMAKE
+        {
+            SqlCommand cmd = new SqlCommand("SELECT * FROM @table WHERE @column = '@value';", Connection);
+            cmd.Parameters.AddWithValue("table", table);
+            cmd.Parameters.AddWithValue("column", whereColumn);
+            cmd.Parameters.AddWithValue("value", whereValue);
+
+            cmd.ExecuteReader();
+        }
+
         private static string MergeSetterArgs(string[] firstArgs, string[] secondArgs)
         {
             if (firstArgs.Length != secondArgs.Length) throw new System.Exception("Number of args is not equals.");
