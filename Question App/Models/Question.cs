@@ -16,6 +16,14 @@ namespace Question_App.Models
             Answer = answer.ToLower();
         }
 
+        public Question(int id, int testId, string content, string answer)
+        {
+            Id = id;
+            TestId = testId;
+            Content = content;
+            Answer = answer.ToLower();
+        }
+
         public void EditContent(string content)
         {
             Content = content;

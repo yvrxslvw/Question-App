@@ -41,7 +41,6 @@ namespace Question_App.Forms
             {
                 Test test = new Test(name, timer);
                 test.InsertDatabase();
-                MessageBox.Show("Тест успешно создан!");
                 Close();
             }
             catch (Exception exc)

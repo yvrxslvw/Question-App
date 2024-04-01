@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Question_App.Forms
 {
@@ -12,11 +11,26 @@ namespace Question_App.Forms
     {
         private readonly List<Question> questions = new List<Question> { };
         private readonly Test editableTest = null;
+        private Question selectedQuestion = null;
+        private bool isDialogShown = false;
 
         public EditTestForm(Test editableTest)
         {
             InitializeComponent();
             this.editableTest = editableTest;
+        }
+
+        private void ClearSelection()
+        {
+            questionListBox.SelectedIndex = -1;
+            selectedQuestion = null;
+            ToggleButtons(false);
+        }
+
+        private void ToggleButtons(bool state)
+        {
+            editQuestionButton.Enabled = state;
+            deleteQuestionButton.Enabled = state;
         }
 
         private void LoadTest()
@@ -37,7 +51,7 @@ namespace Question_App.Forms
 
                 while (reader.Read())
                 {
-                    item = new Question(Convert.ToInt32(reader["Id"]), Convert.ToString(reader["Content"]), Convert.ToString(reader["Answer"]));
+                    item = new Question(Convert.ToInt32(reader["Id"]), editableTest.Id, Convert.ToString(reader["Content"]).Trim(), Convert.ToString(reader["Answer"]).Trim());
                     questionListBox.Items.Add($"{item.Content}");
                     questions.Add(item);
                 }
@@ -87,6 +101,82 @@ namespace Question_App.Forms
                 return;
             }
             e.Handled = true;
+        }
+
+        private void EditButton_Click(object sender, EventArgs e)
+        {
+            string name = nameTextBox.Text;
+            bool timerCorrect = float.TryParse(timerTextBox.Text, out float timer);
+
+            if (name.Length == 0)
+            {
+                Utils.ShowError("Вы не заполнили поле с названием теста.");
+                return;
+            }
+            if (name.Length < 3 || name.Length > 24)
+            {
+                Utils.ShowError("Некорректное название теста.");
+                return;
+            }
+            if (!timerCorrect)
+            {
+                Utils.ShowError("Некорректное время таймера.");
+                return;
+            }
+            if (timer < 1 || timer > 30)
+            {
+                Utils.ShowError("Время таймера не меньше 1 и не больше 30.");
+                return;
+            }
+
+            try
+            {
+                editableTest.EditName(name);
+                editableTest.EditTimer(timer);
+                Close();
+            }
+            catch (Exception exc)
+            {
+                Utils.ShowError("Произошла непредвиденная ошибка...", exc);
+            }
+        }
+
+        private void QuestionListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = questionListBox.SelectedIndex;
+            if (index == -1) return;
+            ToggleButtons(true);
+            selectedQuestion = questions[index];
+        }
+
+        private void AddQuestionButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($"add question feature");
+            isDialogShown = true;
+            ClearSelection();
+        }
+
+        private void EditQuestionButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($"edit question {selectedQuestion.Id} {selectedQuestion.Content} feature");
+            isDialogShown = true;
+            ClearSelection();
+        }
+
+        private void DeleteQuestionButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($"delete question {selectedQuestion.Id} {selectedQuestion.Content} feature");
+            isDialogShown = true;
+            ClearSelection();
+        }
+
+        private void EditTestForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (isDialogShown)
+            {
+                e.Cancel = true;
+                isDialogShown = false;
+            }
         }
     }
 }

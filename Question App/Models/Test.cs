@@ -27,10 +27,10 @@ namespace Question_App.Models
             Database.Update("Tests", new string[] { "Name" }, new string[] { name }, Id);
         }
 
-        public void EditTimer(int timer)
+        public void EditTimer(float timer)
         {
             Timer = timer;
-            Database.Update("Test", new string[] { "Timer" }, new string[] { timer.ToString() }, Id);
+            Database.Update("Tests", new string[] { "Timer" }, new string[] { timer.ToString() }, Id);
         }
 
         public void InsertDatabase()

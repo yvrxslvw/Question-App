@@ -112,7 +112,7 @@ namespace Question_App
                     buttons: MessageBoxButtons.YesNo,
                     icon: MessageBoxIcon.Question
                 );
-            if (result.ToString() == "Yes")
+            if (result == DialogResult.Yes)
             {
                 selectedTest.RemoveDatabase();
                 LoadTests();

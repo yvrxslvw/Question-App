@@ -89,6 +89,7 @@
             this.questionListBox.Name = "questionListBox";
             this.questionListBox.Size = new System.Drawing.Size(368, 166);
             this.questionListBox.TabIndex = 4;
+            this.questionListBox.SelectedIndexChanged += new System.EventHandler(this.QuestionListBox_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -109,6 +110,7 @@
             this.editButton.TabIndex = 6;
             this.editButton.Text = "Редактировать";
             this.editButton.UseVisualStyleBackColor = true;
+            this.editButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
             // cancelButton
             // 
@@ -131,10 +133,12 @@
             this.addQuestionButton.TabIndex = 8;
             this.addQuestionButton.Text = "Добавить";
             this.addQuestionButton.UseVisualStyleBackColor = true;
+            this.addQuestionButton.Click += new System.EventHandler(this.AddQuestionButton_Click);
             // 
             // editQuestionButton
             // 
             this.editQuestionButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.editQuestionButton.Enabled = false;
             this.editQuestionButton.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.editQuestionButton.Location = new System.Drawing.Point(136, 368);
             this.editQuestionButton.Name = "editQuestionButton";
@@ -142,10 +146,12 @@
             this.editQuestionButton.TabIndex = 9;
             this.editQuestionButton.Text = "Изменить";
             this.editQuestionButton.UseVisualStyleBackColor = true;
+            this.editQuestionButton.Click += new System.EventHandler(this.EditQuestionButton_Click);
             // 
             // deleteQuestionButton
             // 
             this.deleteQuestionButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.deleteQuestionButton.Enabled = false;
             this.deleteQuestionButton.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.deleteQuestionButton.Location = new System.Drawing.Point(264, 368);
             this.deleteQuestionButton.Name = "deleteQuestionButton";
@@ -153,9 +159,11 @@
             this.deleteQuestionButton.TabIndex = 10;
             this.deleteQuestionButton.Text = "Удалить";
             this.deleteQuestionButton.UseVisualStyleBackColor = true;
+            this.deleteQuestionButton.Click += new System.EventHandler(this.DeleteQuestionButton_Click);
             // 
             // EditTestForm
             // 
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditTestForm_FormClosing);
             this.AcceptButton = this.editButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
