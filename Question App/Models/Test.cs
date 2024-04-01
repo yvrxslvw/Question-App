@@ -6,17 +6,17 @@ namespace Question_App.Models
     {
         public int Id { get; private set; }
         public string Name { get; private set; }
-        public int Timer { get; private set; }
+        public float Timer { get; private set; }
         //public Question[] Questions { get; private set; }
 
-        public Test(string name, int timer)
+        public Test(string name, float timer)
         {
             Name = name;
             Timer = timer;
             //Questions = questions;
         }
 
-        public Test(int id, string name, int timer)
+        public Test(int id, string name, float timer)
         {
             Id = id;
             Name = name;
@@ -38,7 +38,7 @@ namespace Question_App.Models
 
         public void InsertDatabase()
         {
-            Id = Database.Insert("Test", "Name, Timer", $"'{Name}', '{Timer}'");
+            Id = Database.Insert("Tests", "Name, Timer", $"'{Name}', '{Timer}'");
         }
     }
 }

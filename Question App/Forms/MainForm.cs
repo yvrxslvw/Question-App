@@ -1,4 +1,5 @@
 ﻿using DB;
+using Question_App.Forms;
 using Question_App.Models;
 using System;
 using System.Collections.Generic;
@@ -18,19 +19,10 @@ namespace Question_App
             InitializeComponent();
         }
 
-        private void ShowError(string message, Exception exception)
-        {
-            MessageBox.Show(
-                    text: $"{message}\n{exception.Message}",
-                    caption: "Ошибка",
-                    buttons: MessageBoxButtons.OK,
-                    icon: MessageBoxIcon.Error
-                );
-        }
-
         private void LoadTests()
         {
             testsListBox.Items.Clear();
+            tests.Clear();
 
             SqlDataReader reader = null;
 
@@ -48,7 +40,7 @@ namespace Question_App
             }
             catch (Exception exc)
             {
-                ShowError("Произошла непредвиденная ошибка...", exc);
+                Utils.ShowError("Произошла непредвиденная ошибка...", exc);
             }
             finally
             {
@@ -69,7 +61,7 @@ namespace Question_App
             }
             catch (Exception exc)
             {
-                ShowError("Не удалось подключиться к базе данных.", exc);
+                Utils.ShowError("Не удалось подключиться к базе данных.", exc);
                 Application.Exit();
             }
         }
@@ -89,7 +81,9 @@ namespace Question_App
 
         private void AddNewButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("add new test feature");
+            CreateTestForm createTestForm = new CreateTestForm();
+            createTestForm.ShowDialog();
+            LoadTests();
         }
 
         private void EditButton_Click(object sender, EventArgs e)

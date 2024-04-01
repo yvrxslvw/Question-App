@@ -15,10 +15,7 @@ namespace DB
 
         public static int Insert(string table, string columns, string values)
         {
-            SqlCommand cmd = new SqlCommand("INSERT INTO @table (@columns) VALUES (@values);", Connection);
-            cmd.Parameters.AddWithValue("table", table);
-            cmd.Parameters.AddWithValue("columns", columns);
-            cmd.Parameters.AddWithValue("values", values);
+            SqlCommand cmd = new SqlCommand($"INSERT INTO {table} ({columns}) VALUES ({values});", Connection);
 
             var result = cmd.ExecuteScalar();
 
