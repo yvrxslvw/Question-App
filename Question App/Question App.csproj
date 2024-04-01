@@ -71,6 +71,12 @@
     <Compile Include="Forms\CreateTestForm.Designer.cs">
       <DependentUpon>CreateTestForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\EditTestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EditTestForm.Designer.cs">
+      <DependentUpon>EditTestForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +90,9 @@
     <Compile Include="Utils.cs" />
     <EmbeddedResource Include="Forms\CreateTestForm.resx">
       <DependentUpon>CreateTestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EditTestForm.resx">
+      <DependentUpon>EditTestForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

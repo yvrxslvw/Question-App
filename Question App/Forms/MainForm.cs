@@ -19,6 +19,20 @@ namespace Question_App
             InitializeComponent();
         }
 
+        private void ClearSelection()
+        {
+            testsListBox.SelectedIndex = -1;
+            selectedTest = null;
+            ToggleButtons(false);
+        }
+
+        private void ToggleButtons(bool state)
+        {
+            editButton.Enabled = state;
+            deleteButton.Enabled = state;
+            startTestButton.Enabled = state;
+        }
+
         private void LoadTests()
         {
             testsListBox.Items.Clear();
@@ -34,7 +48,7 @@ namespace Question_App
                 while (reader.Read())
                 {
                     item = new Test(Convert.ToInt32(reader["Id"]), Convert.ToString(reader["Name"]).Trim(), Convert.ToSingle(reader["Timer"]));
-                    testsListBox.Items.Add($"ID: {item.Id}\tНазвание: {item.Name} ({item.Timer}мин)");
+                    testsListBox.Items.Add($"{item.Name} ({item.Timer} мин)");
                     tests.Add(item);
                 }
             }
@@ -70,12 +84,7 @@ namespace Question_App
         {
             int index = testsListBox.SelectedIndex;
             if (index == -1) return;
-
-            addNewButton.Enabled = true;
-            editButton.Enabled = true;
-            deleteButton.Enabled = true;
-            startTestButton.Enabled = true;
-
+            ToggleButtons(true);
             selectedTest = tests[index];
         }
 
@@ -84,11 +93,15 @@ namespace Question_App
             CreateTestForm createTestForm = new CreateTestForm();
             createTestForm.ShowDialog();
             LoadTests();
+            ClearSelection();
         }
 
         private void EditButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"edit {selectedTest.Id} {selectedTest.Name} {selectedTest.Timer} feature");
+            EditTestForm editTestForm = new EditTestForm(selectedTest);
+            editTestForm.ShowDialog();
+            LoadTests();
+            ClearSelection();
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
@@ -104,11 +117,13 @@ namespace Question_App
                 selectedTest.RemoveDatabase();
                 LoadTests();
             }
+            ClearSelection();
         }
 
         private void StartTestButton_Click(object sender, EventArgs e)
         {
             MessageBox.Show($"start {selectedTest.Id} {selectedTest.Name} {selectedTest.Timer} feature");
+            ClearSelection();
         }
     }
 }

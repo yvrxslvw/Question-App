@@ -2,7 +2,7 @@
 
 namespace Question_App.Models
 {
-    internal class Question
+    public class Question
     {
         public int Id { get; private set; }
         public int TestId { get; }
