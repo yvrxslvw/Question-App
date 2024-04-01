@@ -22,10 +22,12 @@ namespace Question_App.Forms
             if (content.Length < 3 || content.Length > 256)
             {
                 Utils.ShowError("Некорректный вопрос.");
+                return;
             }
-            else if (answer.Length < 3 || answer.Length > 128)
+            else if (answer.Length < 1 || answer.Length > 128)
             {
                 Utils.ShowError("Некорректный ответ на вопрос.");
+                return;
             }
 
             try
