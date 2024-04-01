@@ -122,11 +122,26 @@ namespace Question_App
 
         private void StartTestButton_Click(object sender, EventArgs e)
         {
-            selectedTest.GetQuestions();
-            TestForm testForm = new TestForm(selectedTest);
-            testForm.ShowDialog();
-            Dispose();
-            ClearSelection();
+            try
+            {
+                bool success = selectedTest.GetQuestions();
+                if (!success)
+                {
+                    Utils.ShowError("В данном тесте нет вопросов.");
+                    Show();
+                    return;
+                }
+
+                Hide();
+                TestForm testForm = new TestForm(selectedTest);
+                testForm.ShowDialog();
+                Show();
+                ClearSelection();
+            }
+            catch (Exception exc)
+            {
+                Utils.ShowError("Произошла непредвиденная ошибка...", exc);
+            }
         }
 
         private void TestsListBox_MouseDoubleClick(object sender, MouseEventArgs e)

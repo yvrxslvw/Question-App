@@ -10,7 +10,7 @@ namespace Question_App.Models
         public int Id { get; private set; }
         public string Name { get; private set; }
         public float Timer { get; private set; }
-        private List<Question> questions = new List<Question> { };
+        public List<Question> questions = new List<Question> { };
 
         public Test(string name, float timer)
         {
@@ -47,7 +47,7 @@ namespace Question_App.Models
             Database.Delete("Tests", "Id", Id.ToString());
         }
 
-        public void GetQuestions()
+        public bool GetQuestions()
         {
             questions.Clear();
 
@@ -56,6 +56,7 @@ namespace Question_App.Models
             try
             {
                 reader = Database.Select("Questions", "TestId", Id.ToString());
+                if (!reader.HasRows) return false;
                 Question item = null;
 
                 while (reader.Read())
@@ -63,10 +64,12 @@ namespace Question_App.Models
                     item = new Question(Convert.ToInt32(reader["Id"]), Id, Convert.ToString(reader["Content"]).Trim(), Convert.ToString(reader["Answer"]).Trim());
                     questions.Add(item);
                 }
+
+                return true;
             }
             catch (Exception exc)
             {
-                Utils.ShowError("Произошла непредвиденная ошибка...", exc);
+                throw new Exception(string.Empty, exc);
             }
             finally
             {
