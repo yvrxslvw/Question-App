@@ -1,5 +1,4 @@
 ﻿using System.Data.SqlClient;
-using System.Linq;
 
 namespace DB
 {
@@ -13,21 +12,16 @@ namespace DB
             Connection.Open();
         }
 
-        public static int Insert(string table, string columns, string values)
+        public static void Insert(string table, string columns, string values)
         {
             SqlCommand cmd = new SqlCommand($"INSERT INTO {table} ({columns}) VALUES ({values});", Connection);
 
-            var result = cmd.ExecuteScalar();
-
-            return 71061; // TO CHANGE
+            cmd.ExecuteNonQuery();
         }
 
         public static void Delete(string table, string whereColumn, string whereValue)
         {
-            SqlCommand cmd = new SqlCommand("DELETE FROM @table WHERE @column = '@value';", Connection);
-            cmd.Parameters.AddWithValue("table", table);
-            cmd.Parameters.AddWithValue("column", whereColumn);
-            cmd.Parameters.AddWithValue("value", whereValue);
+            SqlCommand cmd = new SqlCommand($"DELETE FROM {table} WHERE {whereColumn} = '{whereValue}';", Connection);
 
             cmd.ExecuteNonQuery();
         }
@@ -36,27 +30,21 @@ namespace DB
         {
             string setters = MergeSetterArgs(columns, values);
 
-            SqlCommand cmd = new SqlCommand("UPDATE @table SET @setters WHERE Id = '@id';", Connection);
-            cmd.Parameters.AddWithValue("table", table);
-            cmd.Parameters.AddWithValue("setters", setters);
-            cmd.Parameters.AddWithValue("id", id);
+            SqlCommand cmd = new SqlCommand($"UPDATE {table} SET {setters} WHERE Id = '{id}';", Connection);
 
             cmd.ExecuteNonQuery();
         }
 
-        public static SqlDataReader Select(string table) // TO REMAKE
+        public static SqlDataReader Select(string table)
         {
             SqlCommand cmd = new SqlCommand($"SELECT * FROM {table};", Connection);
 
             return cmd.ExecuteReader();
         }
 
-        public static SqlDataReader Select(string table, string whereColumn, string whereValue) // TO REMAKE
+        public static SqlDataReader Select(string table, string whereColumn, string whereValue)
         {
-            SqlCommand cmd = new SqlCommand("SELECT * FROM @table WHERE @column = '@value';", Connection);
-            cmd.Parameters.AddWithValue("table", table);
-            cmd.Parameters.AddWithValue("column", whereColumn);
-            cmd.Parameters.AddWithValue("value", whereValue);
+            SqlCommand cmd = new SqlCommand($"SELECT * FROM {table} WHERE {whereColumn} = '{whereValue}';", Connection);
 
             return cmd.ExecuteReader();
         }

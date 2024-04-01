@@ -7,13 +7,11 @@ namespace Question_App.Models
         public int Id { get; private set; }
         public string Name { get; private set; }
         public float Timer { get; private set; }
-        //public Question[] Questions { get; private set; }
 
         public Test(string name, float timer)
         {
             Name = name;
             Timer = timer;
-            //Questions = questions;
         }
 
         public Test(int id, string name, float timer)
@@ -21,7 +19,6 @@ namespace Question_App.Models
             Id = id;
             Name = name;
             Timer = timer;
-            //Questions = questions;
         }
 
         public void EditName(string name)
@@ -38,7 +35,7 @@ namespace Question_App.Models
 
         public void InsertDatabase()
         {
-            Id = Database.Insert("Tests", "Name, Timer", $"'{Name}', '{Timer}'");
+            Database.Insert("Tests", "Name, Timer", $"'{Name}', '{Timer}'");
         }
     }
 }

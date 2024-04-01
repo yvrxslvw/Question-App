@@ -30,7 +30,7 @@ namespace Question_App.Models
 
         public void InsertDatabase()
         {
-            Id = Database.Insert("Questions", "TestId, Content, Answer", $"'{TestId}', '{Content}', '{Answer}'");
+            Database.Insert("Questions", "TestId, Content, Answer", $"'{TestId}', '{Content}', '{Answer}'");
         }
     }
 }
