@@ -137,10 +137,11 @@ namespace Question_App.Forms
 
         private void AddQuestionButton_Click(object sender, EventArgs e)
         {
-            CreateQuestionForm createQuestionForm = new CreateQuestionForm();
+            CreateQuestionForm createQuestionForm = new CreateQuestionForm(editableTest.Id);
             createQuestionForm.ShowDialog();
             isDialogShown = true;
             ClearSelection();
+            LoadTest();
         }
 
         private void EditQuestionButton_Click(object sender, EventArgs e)

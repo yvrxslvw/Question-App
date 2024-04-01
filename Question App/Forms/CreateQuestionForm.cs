@@ -1,20 +1,43 @@
-﻿using System.Windows.Forms;
+﻿using Question_App.Models;
+using System;
+using System.Windows.Forms;
 
 namespace Question_App.Forms
 {
     public partial class CreateQuestionForm : Form
     {
-        public CreateQuestionForm()
+        private readonly int testId;
+
+        public CreateQuestionForm(int testId)
         {
             InitializeComponent();
+            this.testId = testId;
         }
 
-        private void CreateButton_Click(object sender, System.EventArgs e)
+        private void CreateButton_Click(object sender, EventArgs e)
         {
             string content = contentTextBox.Text;
             string answer = answerTextBox.Text;
 
-            MessageBox.Show($"create question feature\n{content} {answer}");
+            if (content.Length < 3 || content.Length > 256)
+            {
+                Utils.ShowError("Некорректный вопрос.");
+            }
+            else if (answer.Length < 3 || answer.Length > 128)
+            {
+                Utils.ShowError("Некорректный ответ на вопрос.");
+            }
+
+            try
+            {
+                Question question = new Question(testId, content, answer);
+                question.InsertDatabase();
+                Close();
+            }
+            catch (Exception exc)
+            {
+                Utils.ShowError("Произошла непредвиденная ошибка...", exc);
+            }
         }
     }
 }
