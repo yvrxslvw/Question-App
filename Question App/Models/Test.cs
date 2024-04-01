@@ -37,5 +37,10 @@ namespace Question_App.Models
         {
             Database.Insert("Tests", "Name, Timer", $"'{Name}', '{Timer}'");
         }
+
+        public void RemoveDatabase()
+        {
+            Database.Delete("Tests", "Id", Id.ToString());
+        }
     }
 }

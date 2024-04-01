@@ -18,8 +18,8 @@ namespace Question_App
         public static void ShowError(string message, Exception exception)
         {
             MessageBox.Show(
-                    text: $"{message}\n\n{exception.Message}",
                     caption: "Ошибка",
+                    text: $"{message}\n\n{exception.Message}",
                     buttons: MessageBoxButtons.OK,
                     icon: MessageBoxIcon.Error
                 );

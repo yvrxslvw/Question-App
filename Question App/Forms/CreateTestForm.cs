@@ -31,6 +31,11 @@ namespace Question_App.Forms
                 Utils.ShowError("Некорректное время таймера.");
                 return;
             }
+            if (timer < 1 || timer > 30)
+            {
+                Utils.ShowError("Некорректное время таймера.");
+                return;
+            }
 
             try
             {

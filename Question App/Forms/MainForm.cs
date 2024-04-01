@@ -34,7 +34,7 @@ namespace Question_App
                 while (reader.Read())
                 {
                     item = new Test(Convert.ToInt32(reader["Id"]), Convert.ToString(reader["Name"]).Trim(), Convert.ToInt32(reader["Timer"]));
-                    testsListBox.Items.Add($"ID: {item.Id}\t{item.Name}");
+                    testsListBox.Items.Add($"ID: {item.Id}\tНазвание: {item.Name} ({item.Timer}мин)");
                     tests.Add(item);
                 }
             }
@@ -93,7 +93,17 @@ namespace Question_App
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"delete {selectedTest.Id} {selectedTest.Name} {selectedTest.Timer} feature");
+            DialogResult result = MessageBox.Show(
+                    caption: "Удаление теста",
+                    text: $"Вы уверены, что хотите удалить тест {selectedTest.Name}?",
+                    buttons: MessageBoxButtons.YesNo,
+                    icon: MessageBoxIcon.Question
+                );
+            if (result.ToString() == "Yes")
+            {
+                selectedTest.RemoveDatabase();
+                LoadTests();
+            }
         }
 
         private void StartTestButton_Click(object sender, EventArgs e)
