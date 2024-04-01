@@ -6,15 +6,13 @@
 
 *  лонировать проект
 
-```bash
-  git clone https://github.com/yvrxslvw/Question-App
-```
-
 * ќткрыть solution;
 
-* —оздать сервисную базу данных внутри проекта;
+* —оздать сервисную базу данных внутри проекта Question App;
 
-* »зменить Connection String в файле App.config;
+* »сполнить сначала dbo.Tests.sql код, потом dbo.Questions.sql код (ѕќ–яƒќ  ќЅя«ј“≈Ћ≈Ќ);
+
+* »зменить значени€ ключа connectionString в файле App.config;
 
 * «апустить без отладки [Ctrl + F5].
 
