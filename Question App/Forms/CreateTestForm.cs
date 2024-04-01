@@ -61,21 +61,7 @@ namespace Question_App.Forms
                 if (timerTextBox.Text.IndexOf(".") != -1) e.Handled = true;
                 return;
             }
-            else if (Char.IsControl(e.KeyChar))
-            {
-                if (e.KeyChar == (char)Keys.Enter) createButton.PerformClick();
-                return;
-            }
             e.Handled = true;
-        }
-
-        private void NameTextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (Char.IsControl(e.KeyChar))
-            {
-                if (e.KeyChar == (char)Keys.Enter) createButton.PerformClick();
-                return;
-            }
         }
     }
 }

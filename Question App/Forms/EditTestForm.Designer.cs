@@ -69,7 +69,6 @@
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(368, 27);
             this.nameTextBox.TabIndex = 2;
-            this.nameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NameTextBox_KeyPress);
             // 
             // timerTextBox
             // 
@@ -163,7 +162,6 @@
             // 
             // EditTestForm
             // 
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditTestForm_FormClosing);
             this.AcceptButton = this.editButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -180,12 +178,15 @@
             this.Controls.Add(this.nameTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "EditTestForm";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Редактирование теста";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditTestForm_FormClosing);
             this.Load += new System.EventHandler(this.EditTestForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

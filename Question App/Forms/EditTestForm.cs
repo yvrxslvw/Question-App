@@ -74,15 +74,6 @@ namespace Question_App.Forms
             LoadTest();
         }
 
-        private void NameTextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (Char.IsControl(e.KeyChar))
-            {
-                if (e.KeyChar == (char)Keys.Enter) editButton.PerformClick();
-                return;
-            }
-        }
-
         private void TimerTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar >= '0' && e.KeyChar <= '9') return;
@@ -93,11 +84,6 @@ namespace Question_App.Forms
             else if (e.KeyChar == '.')
             {
                 if (timerTextBox.Text.IndexOf(".") != -1) e.Handled = true;
-                return;
-            }
-            else if (Char.IsControl(e.KeyChar))
-            {
-                if (e.KeyChar == (char)Keys.Enter) editButton.PerformClick();
                 return;
             }
             e.Handled = true;
@@ -151,7 +137,8 @@ namespace Question_App.Forms
 
         private void AddQuestionButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"add question feature");
+            CreateQuestionForm createQuestionForm = new CreateQuestionForm();
+            createQuestionForm.ShowDialog();
             isDialogShown = true;
             ClearSelection();
         }
