@@ -33,7 +33,7 @@ namespace Question_App.Forms
             }
             if (timer < 1 || timer > 30)
             {
-                Utils.ShowError("Некорректное время таймера.");
+                Utils.ShowError("Время таймера не меньше 1 и не больше 30.");
                 return;
             }
 

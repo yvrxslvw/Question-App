@@ -33,7 +33,7 @@ namespace Question_App
 
                 while (reader.Read())
                 {
-                    item = new Test(Convert.ToInt32(reader["Id"]), Convert.ToString(reader["Name"]).Trim(), Convert.ToInt32(reader["Timer"]));
+                    item = new Test(Convert.ToInt32(reader["Id"]), Convert.ToString(reader["Name"]).Trim(), Convert.ToSingle(reader["Timer"]));
                     testsListBox.Items.Add($"ID: {item.Id}\tНазвание: {item.Name} ({item.Timer}мин)");
                     tests.Add(item);
                 }

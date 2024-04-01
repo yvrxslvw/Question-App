@@ -35,7 +35,7 @@ namespace Question_App.Models
 
         public void InsertDatabase()
         {
-            Database.Insert("Tests", "Name, Timer", $"'{Name}', '{Timer}'");
+            Database.Insert("Tests", "Name, Timer", $"N'{Name}', '{Timer}'");
         }
 
         public void RemoveDatabase()
