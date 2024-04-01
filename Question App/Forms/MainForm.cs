@@ -122,7 +122,10 @@ namespace Question_App
 
         private void StartTestButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"start {selectedTest.Id} {selectedTest.Name} {selectedTest.Timer} feature");
+            selectedTest.GetQuestions();
+            TestForm testForm = new TestForm(selectedTest);
+            testForm.ShowDialog();
+            Dispose();
             ClearSelection();
         }
 

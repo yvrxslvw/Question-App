@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Question_App
@@ -23,6 +24,18 @@ namespace Question_App
                     buttons: MessageBoxButtons.OK,
                     icon: MessageBoxIcon.Error
                 );
+        }
+
+        public static void ShuffleList<T>(ref List<T> list)
+        {
+            int len = list.Count;
+            Random rnd = new Random();
+
+            for (int i = 0; i < len; i++)
+            {
+                int index = rnd.Next(0, len - 1);
+                (list[i], list[index]) = (list[index], list[i]);
+            }
         }
     }
 }
