@@ -108,7 +108,7 @@ namespace Question_App
         {
             DialogResult result = MessageBox.Show(
                     caption: "Удаление теста",
-                    text: $"Вы уверены, что хотите удалить тест {selectedTest.Name}?",
+                    text: $"Вы уверены, что хотите удалить тест \"{selectedTest.Name}\"?",
                     buttons: MessageBoxButtons.YesNo,
                     icon: MessageBoxIcon.Question
                 );
@@ -124,6 +124,18 @@ namespace Question_App
         {
             MessageBox.Show($"start {selectedTest.Id} {selectedTest.Name} {selectedTest.Timer} feature");
             ClearSelection();
+        }
+
+        private void TestsListBox_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            int index = testsListBox.IndexFromPoint(e.Location);
+            if (index != ListBox.NoMatches)
+            {
+                EditTestForm editTestForm = new EditTestForm(selectedTest);
+                editTestForm.ShowDialog();
+                LoadTests();
+                ClearSelection();
+            }
         }
     }
 }

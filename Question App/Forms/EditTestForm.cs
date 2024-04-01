@@ -38,6 +38,7 @@ namespace Question_App.Forms
             nameTextBox.Clear();
             timerTextBox.Clear();
             questionListBox.Items.Clear();
+            questions.Clear();
 
             nameTextBox.Text = editableTest.Name;
             timerTextBox.Text = editableTest.Timer.ToString();
@@ -146,14 +147,26 @@ namespace Question_App.Forms
 
         private void EditQuestionButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"edit question {selectedQuestion.Id} {selectedQuestion.Content} feature");
+            EditQuestionForm editQuestionForm = new EditQuestionForm(selectedQuestion);
+            editQuestionForm.ShowDialog();
             isDialogShown = true;
             ClearSelection();
+            LoadTest();
         }
 
         private void DeleteQuestionButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"delete question {selectedQuestion.Id} {selectedQuestion.Content} feature");
+            DialogResult result = MessageBox.Show(
+                    caption: "Удаление вопроса",
+                    text: $"Вы уверены, что хотите удалить вопрос \"{selectedQuestion.Content}\"?",
+                    buttons: MessageBoxButtons.YesNo,
+                    icon: MessageBoxIcon.Question
+                );
+            if (result == DialogResult.Yes)
+            {
+                selectedQuestion.RemoveDatabase();
+                LoadTest();
+            }
             isDialogShown = true;
             ClearSelection();
         }
@@ -164,6 +177,18 @@ namespace Question_App.Forms
             {
                 e.Cancel = true;
                 isDialogShown = false;
+            }
+        }
+
+        private void QuestionListBox_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            int index = questionListBox.IndexFromPoint(e.Location);
+            if (index != ListBox.NoMatches)
+            {
+                EditQuestionForm editQuestionForm = new EditQuestionForm(selectedQuestion);
+                editQuestionForm.ShowDialog();
+                LoadTest();
+                ClearSelection();
             }
         }
     }

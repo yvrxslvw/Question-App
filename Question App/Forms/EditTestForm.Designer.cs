@@ -89,6 +89,7 @@
             this.questionListBox.Size = new System.Drawing.Size(368, 166);
             this.questionListBox.TabIndex = 4;
             this.questionListBox.SelectedIndexChanged += new System.EventHandler(this.QuestionListBox_SelectedIndexChanged);
+            this.questionListBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.QuestionListBox_MouseDoubleClick);
             // 
             // label3
             // 

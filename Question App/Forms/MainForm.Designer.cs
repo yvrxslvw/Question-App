@@ -52,6 +52,7 @@
             this.testsListBox.FormattingEnabled = true;
             this.testsListBox.Name = "testsListBox";
             this.testsListBox.SelectedIndexChanged += new System.EventHandler(this.TestsListBox_SelectedIndexChanged);
+            this.testsListBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TestsListBox_MouseDoubleClick);
             // 
             // startTestButton
             // 

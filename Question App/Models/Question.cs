@@ -40,5 +40,10 @@ namespace Question_App.Models
         {
             Database.Insert("Questions", "TestId, Content, Answer", $"'{TestId}', N'{Content}', N'{Answer}'");
         }
+
+        public void RemoveDatabase()
+        {
+            Database.Delete("Questions", "Id", Id.ToString());
+        }
     }
 }
