@@ -62,19 +62,18 @@ namespace Question_App.Forms
         private void TimerTick(object sender, EventArgs e)
         {
             timeLeft -= 1;
+            timerLabel.Text = timeLeft.ToString();
 
-            if (test.Timer == 0)
+            if (timeLeft == 0)
             {
                 CheckResult();
             }
-
-            timerLabel.Text = timeLeft.ToString();
         }
 
         private void CheckResult()
         {
             timer.Stop();
-            double percent = Math.Round(((double)correctAnswers /test.questions.Count) * 100f, 1);
+            double percent = Math.Round(((double)correctAnswers / test.questions.Count) * 100f, 1);
             MessageBox.Show(
                 caption: "Результаты теста",
                 text: $"Поздравляю с завершением теста!\n\nПравильных ответов: {correctAnswers} из {test.questions.Count} ({percent}%)",

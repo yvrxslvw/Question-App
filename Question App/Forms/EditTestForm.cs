@@ -78,15 +78,13 @@ namespace Question_App.Forms
         private void TimerTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar >= '0' && e.KeyChar <= '9') return;
-            else if (e.KeyChar == ',')
-            {
-                e.KeyChar = '.';
-            }
+            else if (e.KeyChar == ',') e.KeyChar = '.';
             else if (e.KeyChar == '.')
             {
                 if (timerTextBox.Text.IndexOf(".") != -1) e.Handled = true;
                 return;
             }
+            else if (Char.IsControl(e.KeyChar)) return;
             e.Handled = true;
         }
 

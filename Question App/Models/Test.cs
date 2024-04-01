@@ -44,6 +44,7 @@ namespace Question_App.Models
 
         public void RemoveDatabase()
         {
+            Database.Delete("Questions", "TestId", Id.ToString());
             Database.Delete("Tests", "Id", Id.ToString());
         }
 
